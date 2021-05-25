@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-
+const IP = '192.168.1.4';
 
 export function getReminders(id) {
-  return fetch('http://192.168.1.4:4000/api/getReminders/' + id)
+  return fetch('http://'+IP+':4000/api/getReminders/' + id)
     .then((response) => response.json())
     .then((json) => {
       //console.log(json)
@@ -19,7 +19,7 @@ export function getReminders(id) {
 
 export function createReminder(data) {
   console.log(data);
-  return fetch('http://192.168.1.4:4000/api/createReminder',
+  return fetch('http://'+IP+':4000/api/createReminder',
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -41,7 +41,7 @@ export function createReminder(data) {
 export function modifyReminder(id, data) {
   const b = JSON.stringify(data)
   console.log(b);
-  return fetch('http://192.168.1.4:4000/api/modifyReminder/' + id,
+  return fetch('http://'+IP+':4000/api/modifyReminder/' + id,
     {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -59,7 +59,7 @@ export function modifyReminder(id, data) {
 
 
 export function removeReminder(id) {
-  return fetch('http://192.168.1.4:4000/api/removeReminder/' + id,
+  return fetch('http://'+IP+':4000/api/removeReminder/' + id,
     {
       method: 'DELETE'
     })

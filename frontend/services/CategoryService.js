@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-
+const IP = '192.168.1.4';
 
 export function getCategories(id) {
   return fetch('http://192.168.1.4:4000/api/getCategories/' + id)
@@ -18,7 +18,7 @@ export function getCategories(id) {
 
 export function createCategory(data) {
 
-  return fetch('http://192.168.1.4:4000/api/createCategory',
+  return fetch('http://'+IP+':4000/api/createCategory',
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,7 @@ export function createCategory(data) {
 export function modifyCategory(id, data) {
   console.log(data)
 
-  return fetch('http://192.168.1.4:4000/api/modifyCategory/' + id,
+  return fetch('http://'+IP+':4000/api/modifyCategory/' + id,
     {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -56,7 +56,7 @@ export function modifyCategory(id, data) {
 
 
 export function removeCategory(id) {
-  return fetch('http://192.168.1.4:4000/api/removeCategory/' + id,
+  return fetch('http://'+IP+':4000/api/removeCategory/' + id,
     {
       method: 'DELETE'
     })
