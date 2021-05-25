@@ -1,0 +1,28 @@
+{
+  "name": "remind-me",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keeeeezay/Remind-me.git"
+  },
+  "author": "J.E.N.G, A.L.G, J.G.F",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Keeeeezay/Remind-me/issues"
+  },
+  "homepage": "https://github.com/Keeeeezay/Remind-me#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.11.18",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-sequence": "^5.3.1",
+    "mongoose-unique-validator": "^2.0.3"
+  }
+}
