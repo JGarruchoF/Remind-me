@@ -12,14 +12,12 @@ export function Register({ navigation }) {
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
 
-
   function crearUsuario(email, username, password, passwordCheck) {
     if(password == passwordCheck){
       const data = {
         "username":username,
         "password":password
       }
-      console.log(data)
       createUser(data);
     }
 
@@ -54,16 +52,7 @@ export function Register({ navigation }) {
         >
         </TextInput> */}
         <TextInput placeholder='nombre de usuario'
-          style={{
-            textAlign: 'center',
-            borderRadius: 40,
-            fontSize: 20,
-            borderColor: '#FFFFFF',
-            borderWidth: 1,
-            marginLeft: '10%',
-            marginRight: '10%',
-            marginTop: 10
-          }}
+          style={styles.input}
           onChangeText={(v) => setUsername(v)}
         >
         </TextInput>
@@ -71,31 +60,13 @@ export function Register({ navigation }) {
 
         <TextInput
           placeholder='contraseña'
-          secureTextEntry={true} style={{
-            textAlign: 'center',
-            borderRadius: 40,
-            fontSize: 20,
-            borderColor: '#FFFFFF',
-            borderWidth: 1,
-            marginLeft: '10%',
-            marginRight: '10%',
-            marginTop: 10
-          }}
+          secureTextEntry={true} style={styles.input}
           onChangeText={(v) => setPassword(v)}>
         </TextInput>
 
         <TextInput
           placeholder='repite tu contraseña'
-          secureTextEntry={true} style={{
-            textAlign: 'center',
-            borderRadius: 40,
-            fontSize: 20,
-            borderColor: '#FFFFFF',
-            borderWidth: 1,
-            marginLeft: '10%',
-            marginRight: '10%',
-            marginTop: 10
-          }}
+          secureTextEntry={true} style={styles.input}
           onChangeText={(v) => setPasswordCheck(v)}
         >
         </TextInput>
@@ -136,4 +107,15 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 400,
   },
+  input: {
+      textAlign: 'center',
+      borderRadius: 40,
+      fontSize: 20,
+      borderColor: '#FFFFFF',
+      borderWidth: 1,
+      marginLeft: '10%',
+      marginRight: '10%',
+      marginTop: 10
+  }
+
 });

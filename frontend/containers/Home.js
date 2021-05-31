@@ -20,11 +20,12 @@ import { getCategories, createCategory, modifyCategory, removeCategory } from ".
 
 
 
-const Category = ({ category, functionRemove, navigation }) => {
+const Category = ({ category, functionRemove, navigation, route }) => {
   const colors = ['#3EFACD', '#30D958', '#7EF041', '#D8D930', '#FCD838', '#FAEA2F', '#F09832', '#FC282E'];
 
   const title = category["categoryName"];
   const id = category["categoryId"];
+  const userId = route.params["userId"];
 
   const [txt, setTxt] = useState(title);
   const [isEditable, setEditable] = useState(false);
@@ -43,7 +44,8 @@ const Category = ({ category, functionRemove, navigation }) => {
           console.log("has pulsado la categoria " + txt);
           navigation.navigate("Categoria", {
             categoryId: id,
-            categoria: txt
+            categoria: txt,
+            userId: userId
           });
         }
       }}
@@ -123,6 +125,7 @@ const Home = ({ route, navigation }) => {
       category={item}
       functionRemove={() => remove(item["categoryId"])}
       navigation={navigation}
+      route = {route}
     />
   );
 
@@ -156,7 +159,8 @@ const Home = ({ route, navigation }) => {
       {/* Header */}
       <View style={{ flexDirection: "row" }}>
         <Text style={{ fontSize: 32, color: "white", marginRight: 10 }}>
-          Tus Categorías {userId}
+          Tus Categorías 
+          {/* {userId}  */}
         </Text>
         
       </View>

@@ -4,6 +4,7 @@ import React from 'react';
 const IP = '192.168.1.4';
 
 export function getReminders(id) {
+  console.log(id)
   return fetch('http://'+IP+':4000/api/getReminders/' + id)
     .then((response) => response.json())
     .then((json) => {
