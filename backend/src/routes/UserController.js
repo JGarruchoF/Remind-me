@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const User = require('../models/User');
 const UserService = require('../services/UserService');
+const jwt = require('jsonwebtoken');
 
 router.get('/api/getUsers', async (req, res) => {
     let users = await User.find();
@@ -47,20 +48,31 @@ router.post('/api/createUser', bodyParser.json(), (req, res) => {
 
 });
 
-router.post('/api/login', bodyParser.json(), (req, res) => {
-    var data = new User();
-
-    data.userName = req.body.username;
-    data.password = req.body.password;
+router.post('/api/login', bodyParser.json(), async (req, res) => {
+    User.findOne({ userName: req.body.userName }, function (err, user) {
+        if(err) {
+            res.json({mensaje:'errorholahola'})
+        }else{
+        if (user){
+        if (user && user.validPassword(req.body.password)) {
+        
+            const token = jwt.sign({id : user.userId} , "clavesecreta", {
+                expiresIn: 1440
+            });
     
-    UserService.createUser(data, (created) => {
-        if (!created) {
-            res.json("El usuario no ha sido creado").status(400);
+            res.json({
+                mensaje: 'Autenticación correcta',
+                token: token,
+            }).status(200);
+    
         } else {
-            res.json("El usuario ha sido creado").status(200);
+            res.json({ mensaje: "Usuario o contraseña incorrectos" }).status(401)
         }
-    });
 
-});
+    }else {
+        res.json({ mensaje: "Usuario o contraseña incorrectos" }).status(401)
+    }
+}});
+})
 
 module.exports = router;

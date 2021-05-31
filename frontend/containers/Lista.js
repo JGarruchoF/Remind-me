@@ -17,7 +17,6 @@ import { getReminders, createReminder, modifyReminder, removeReminder } from "..
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
-const userId = 1;
 
 
 
@@ -25,7 +24,7 @@ const Reminder = ({ reminder, remove }) => {
   const [isDone, setDone] = useState(reminder["completed"]);
   const id = reminder["reminderId"]
   const txt = reminder["reminderTitle"]
-
+  const date = new Date(reminder['reminderDate']);
 
 
   function reminderDone() {
@@ -54,6 +53,14 @@ const Reminder = ({ reminder, remove }) => {
           >
             {txt}
           </Text>
+
+        </View>
+        <View style={{ flex: 2, flexDirection: "row" }}>
+          <Text style={{
+            fontSize: 16,
+          }}>
+            {date.getDate() + '/' + (date.getMonth() + 1)}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -62,7 +69,8 @@ const Reminder = ({ reminder, remove }) => {
 
 const Lista = ({ route, navigation }) => {
   const categoria = route.params["categoria"];
-  const categoryId = route.params["id"];
+  const categoryId = route.params["categoryId"];
+  const userId = route.params["userId"];
 
   const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
@@ -87,7 +95,7 @@ const Lista = ({ route, navigation }) => {
 
   const addReminder = (txt, date) => {
     console.log("Creando reminder " + txt);
-    var dateString = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay();
+    //var dateString = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay();
     var newRem = {
       completed: false,
       reminderTitle: txt,
@@ -101,7 +109,8 @@ const Lista = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    getReminders(userId).then((res) => setData(res['reminders'].filter(x => x['category'] == categoryId)));
+    getReminders(userId).then((res) => res != 'Reminder not found' ?
+      setData(res['reminders'].filter(x => x['category'] == categoryId)) : {});
   }, [refresh]);
 
   const textInput = useRef(null);

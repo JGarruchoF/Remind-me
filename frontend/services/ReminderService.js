@@ -17,12 +17,18 @@ export function getReminders(id) {
 
 
 
+
+
+
 export function createReminder(data) {
-  console.log(data);
+  //console.log(data);
   return fetch('http://'+IP+':4000/api/createReminder',
     {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        // 'access-token': window.localStorage.token
+     },
       body: JSON.stringify(data)
     })
     .then((response) => response.json())

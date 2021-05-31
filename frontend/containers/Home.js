@@ -10,6 +10,7 @@ import {
   TextInput,
   Alert,
   Image,
+  AsyncStorage
 } from "react-native";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -19,12 +20,8 @@ import { getCategories, createCategory, modifyCategory, removeCategory } from ".
 
 
 
-const userId = 1;
-
-
 const Category = ({ category, functionRemove, navigation }) => {
   const colors = ['#3EFACD', '#30D958', '#7EF041', '#D8D930', '#FCD838', '#FAEA2F', '#F09832', '#FC282E'];
-
 
   const title = category["categoryName"];
   const id = category["categoryId"];
@@ -45,7 +42,7 @@ const Category = ({ category, functionRemove, navigation }) => {
         } else {
           console.log("has pulsado la categoria " + txt);
           navigation.navigate("Categoria", {
-            id: id,
+            categoryId: id,
             categoria: txt
           });
         }
@@ -110,9 +107,10 @@ const Category = ({ category, functionRemove, navigation }) => {
   );
 };
 
-const Home = ({ navigation }) => {
+const Home = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const userId = route.params["userId"];
 
   useEffect(() => {
     getCategories(userId).then((res) => setData(res['categories']));
@@ -148,26 +146,35 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{flexDirection: 'row', alignSelf:'flex-end', marginHorizontal:20}}>
+        <Button
+          onPress={() => {AsyncStorage.clear(); navigation.navigate("Login")}}
+          type="clear"
+          icon={<Icon name="sign-out" size={32} color="white" />}
+        />
+      </View>
       {/* Header */}
-
       <View style={{ flexDirection: "row" }}>
         <Text style={{ fontSize: 32, color: "white", marginRight: 10 }}>
-          Tus Categorías
+          Tus Categorías {userId}
         </Text>
-        <Button
-          onPress={() => addItem()}
-          type="clear"
-          icon={<Icon name="plus-circle" size={32} color="white" />}
-        />
+        
       </View>
 
       {/* Lista categorias */}
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item) => item["categoryId"]}//item["CategoryId"]}
+        keyExtractor={(item) => item["categoryId"].toString()}
         numColumns={2}
       />
+      <View style={{margin:30}}>
+      <Button
+          onPress={() => addItem()}
+          type="clear"
+          icon={<Icon name="plus-circle" size={50} color="white"/>}
+        />
+        </View>
     </SafeAreaView>
   );
 };

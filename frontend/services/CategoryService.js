@@ -4,7 +4,7 @@ import React from 'react';
 const IP = '192.168.1.4';
 
 export function getCategories(id) {
-  return fetch('http://192.168.1.4:4000/api/getCategories/' + id)
+  return fetch('http://'+IP+':4000/api/getCategories/' + id)
     .then((response) => response.json())
     .then((json) => {
       //console.log(json)
