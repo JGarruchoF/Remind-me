@@ -1,8 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React , {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, Button, AsyncStorage } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import {login} from '../services/UserService';
 // import { decodeToken } from "react-jwt";
 import jwt from 'jwt-decode';

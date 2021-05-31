@@ -1,4 +1,3 @@
-import React from 'react';
 import { AsyncStorage } from 'react-native';
 
 const IP = '192.168.1.4';

@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 const IP = '192.168.1.4';
 
 export function getReminders(id) {
